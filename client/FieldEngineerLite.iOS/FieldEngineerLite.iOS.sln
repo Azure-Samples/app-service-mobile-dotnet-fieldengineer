@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieldEngineerLite.iOS", "FieldEngineerLite.iOS.csproj", "{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Debug|iPhone.Build.0 = Debug|iPhone
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Release|iPhone.ActiveCfg = Release|iPhone
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Release|iPhone.Build.0 = Release|iPhone
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{59A5B44A-F4EC-4468-8695-BC5F2846F9CE}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f1003602-a8b5-4dc9-b601-99711543ff2e</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>FieldEngineerLite</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Customer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Equipment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Job.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\JobCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\JobDetailsPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\JobGroupingHeaderCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\JobListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\JobStatusToColorConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\LoggingHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\JobService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\JobHeaderView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\JobMasterDetailPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MockJobService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
+  </ItemGroup>
+</Project>
