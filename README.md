@@ -17,7 +17,7 @@ Next, be sure you have an internet connection and have the Field Engineer app op
 
 Once you've managed to login, you'll see all the orders you have waiting to be fulfilled. At this point, you can disconnect your internet and make some changes. All your changes will be saved through a restart of the app. If you visit the admin page that comes with your site ({sitename}.azurewebsites.net/admin), you can see that none of the records have been updated. If you connect to the internet on your device again and refresh, your changes will sync to the server. You can see those changes reflected via the admin portal.
 
-![Example of the Demo](./demo.gif)
+![Imgur](http://i.imgur.com/tI2tcLI.gif)
 
 ### See also
 
