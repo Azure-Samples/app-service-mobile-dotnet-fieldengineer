@@ -31,10 +31,12 @@ namespace FieldEngineerLite
         
         // 1. add client initializer
         public IMobileServiceClient MobileService = null;
-            
+        public static string GatewayURL= "{gatewayURL}";
+        public static string MobileAppURL = "{mobileappURL}";
+        public static string MobileAppName = "{mobileappname}";
         
         public AppServiceClient AppService = 
-            new AppServiceClient("https://fieldengineeref90e9309d7f4a608a99748e0eea69de.azurewebsites.net");
+            new AppServiceClient(GatewayURL);
         // 2. add sync table
         private IMobileServiceSyncTable<Job> jobTable;
           
@@ -42,11 +44,11 @@ namespace FieldEngineerLite
         public async Task InitializeAsync()
         {
             this.MobileService = AppService.CreateMobileServiceClient(
-                "https://fetechnician-code.azurewebsites.net/",
-                "OtFsjAFDBBMENsPCBQFJmItwjvAfaX77");
+                MobileAppURL,
+                "");
             // 3. initialize local store
 
-            var store = new MobileServiceSQLiteStore("local-db-fabrikam80");
+            var store = new MobileServiceSQLiteStore("local-db-" + MobileAppName);
             store.DefineTable<Job>();
 
             await MobileService.SyncContext.InitializeAsync(store);
