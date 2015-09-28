@@ -1,6 +1,6 @@
 # Field Engineer<small> - Azure Mobile Apps Demo</small>
 
-** Try out a simple version of this demo and other Xamarin demos on ["Try App Service"](https://aka.ms/trymobile). **
+**Try out a simple version of this demo and other Xamarin demos on ["Try App Service"](https://aka.ms/trymobile).**
 
 In this demo, we create a Mobile App which will allow field engineers at our cable company to more easily manage their appointments throughout the day. The app will sync the engineer's jobs for that day onto their device when there is an internet connection. When there isn't an internet connection, the Mobile Apps offline sync feature keeps the records available and edittable; when the engineer connects back to the internet, the local changes are synced and any new Jobs are pulled to their device.
 
