@@ -37,13 +37,13 @@ namespace FieldEngineerLiteService.Models
                 modelBuilder.HasDefaultSchema("mobile");
             }
 
-            Database.SetInitializer<JobDbContext>(null); //new JobDbContextInitializer());
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Add(
+                new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
+                    "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
     }
 
-    public class JobDbContextInitializer :
-           ClearDatabaseSchemaAlways<JobDbContext>
+    public class JobDbContextInitializer : CreateDatabaseIfNotExists<JobDbContext>
     {
         protected override void Seed(JobDbContext context)
         {
