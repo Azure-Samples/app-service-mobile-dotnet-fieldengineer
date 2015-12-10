@@ -21,13 +21,6 @@ namespace FieldEngineerLiteService.DataObjects
 
         public string WorkPerformed { get; set; }
 
-
-
-
-
-
-
-
         public Job()
         {
             Id = Guid.NewGuid().ToString("N");

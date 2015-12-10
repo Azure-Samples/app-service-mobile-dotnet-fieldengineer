@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using FieldEngineerLiteService.DataObjects;
 using FieldEngineerLiteService.Models;
 
-namespace CarDealership.Controllers
+namespace FieldEngineer.Controllers
 {
     public class AdminController : Controller
     {

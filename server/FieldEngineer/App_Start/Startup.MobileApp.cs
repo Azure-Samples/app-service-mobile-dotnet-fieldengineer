@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
 using FieldEngineerLiteService.Models;
 using Microsoft.Azure.Mobile.Server.Config;
+using Owin;
 
-namespace CarDealership
+namespace FieldEngineer
 {
-    public static class WebApiConfig
+    public partial class Startup
     {
-        public static void Register(HttpConfiguration config)
+        public static void ConfigureMobileApp(IAppBuilder app)
         {
+            HttpConfiguration config = new HttpConfiguration();
+
+            AreaRegistration.RegisterAllAreas();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
@@ -18,6 +28,8 @@ namespace CarDealership
 
 
             Database.SetInitializer(new JobDbContextInitializer());
+
+            app.UseWebApi(config);
 
             // ----------------------------------------
             // UseDefaultConfiguration() equivalent to:

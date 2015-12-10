@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace CarDealership
+namespace FieldEngineer
 {
     public class BundleConfig
     {

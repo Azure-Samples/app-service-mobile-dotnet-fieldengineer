@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CarDealership</RootNamespace>
-    <AssemblyName>CarDealership</AssemblyName>
+    <RootNamespace>FieldEngineer</RootNamespace>
+    <AssemblyName>FieldEngineer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -44,10 +44,6 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -64,36 +60,32 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server, Version=0.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.0.2.553\lib\net45\Microsoft.Azure.Mobile.Server.dll</HintPath>
+    <Reference Include="Microsoft.Azure.Mobile.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.1.0.119.0\lib\net45\Microsoft.Azure.Mobile.Server.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server.Authentication, Version=0.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Authentication.0.2.553\lib\net45\Microsoft.Azure.Mobile.Server.Authentication.dll</HintPath>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Authentication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Authentication.1.0.119.0\lib\net45\Microsoft.Azure.Mobile.Server.Authentication.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server.CrossDomain, Version=0.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.CrossDomain.0.2.553\lib\net45\Microsoft.Azure.Mobile.Server.CrossDomain.dll</HintPath>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Entity.1.0.119.0\lib\net45\Microsoft.Azure.Mobile.Server.Entity.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server.Entity, Version=0.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Entity.0.2.553\lib\net45\Microsoft.Azure.Mobile.Server.Entity.dll</HintPath>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Home, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Home.1.0.119.0\lib\net45\Microsoft.Azure.Mobile.Server.Home.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server.Home, Version=0.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Home.0.2.553\lib\net45\Microsoft.Azure.Mobile.Server.Home.dll</HintPath>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Notifications, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Notifications.1.0.119.0\lib\net45\Microsoft.Azure.Mobile.Server.Notifications.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server.Notifications, Version=0.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Notifications.0.2.553\lib\net45\Microsoft.Azure.Mobile.Server.Notifications.dll</HintPath>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Quickstart, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Quickstart.1.0.119.0\lib\net45\Microsoft.Azure.Mobile.Server.Quickstart.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server.Quickstart, Version=0.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Quickstart.0.2.553\lib\net45\Microsoft.Azure.Mobile.Server.Quickstart.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Mobile.Server.Tables, Version=0.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Tables.0.2.553\lib\net45\Microsoft.Azure.Mobile.Server.Tables.dll</HintPath>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Tables, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Tables.1.0.119.0\lib\net45\Microsoft.Azure.Mobile.Server.Tables.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Azure.NotificationHubs, Version=2.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -133,15 +125,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RazorEngine, Version=3.7.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <HintPath>..\packages\RazorEngine.3.7.0\lib\net45\RazorEngine.dll</HintPath>
+    <Reference Include="RazorEngine, Version=3.7.4.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.7.4\lib\net45\RazorEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20511.1437, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -188,6 +180,10 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.5.2.3\lib\net45\System.Web.Http.Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
@@ -232,24 +228,30 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="DataObjects\Job.cs" />
-    <Compile Include="Models\JobDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\JobDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\FieldEngineerLite-code - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -258,6 +260,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.1.debug.js" />
+    <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -269,7 +273,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
