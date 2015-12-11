@@ -80,7 +80,7 @@ namespace FieldEngineer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,AgentId,JobNumber,Title,StartTime,EndTime,Status,CustomerName,CustomerAddress,CustomerPhoneNumber,WorkPerformed,Version,CreatedAt,UpdatedAt,Deleted")] Job job)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,AgentId,JobNumber,Title,StartTime,EndTime,Status,CustomerName,CustomerAddress,CustomerPhoneNumber,WorkPerformed,CreatedAt,UpdatedAt,Version,Deleted")] Job job)
         {
             if (ModelState.IsValid)
             {
