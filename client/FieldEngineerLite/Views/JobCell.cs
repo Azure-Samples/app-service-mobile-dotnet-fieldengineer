@@ -13,11 +13,11 @@ namespace FieldEngineerLite.Views
         {
             var jobHeader = new JobHeaderView();
 
-            var title = new Label();
+            var title = new Label { TextColor = Color.White };
             //title.Font = AppStyle.DefaultFont;
             title.SetBinding<Job>(Label.TextProperty, job => job.Title);
 
-            var customer = new Label();
+            var customer = new Label { TextColor = Color.White };
             //customer.Font = AppStyle.DefaultFont;
             customer.SetBinding<Job>(Label.TextProperty, job => job.CustomerName);            
 
@@ -31,15 +31,24 @@ namespace FieldEngineerLite.Views
                     {
                         Orientation = StackOrientation.Horizontal,
                         Children = {
-                            new Label { Text = "Customer:", FontAttributes = FontAttributes.Bold },
+                            new Label { Text = "Customer:",
+                                FontSize =  Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                                FontAttributes = FontAttributes.Bold,
+                                TextColor = Color.White },
                             customer
                         }
                     },
-                    new Label { Text = "Description:", FontAttributes = FontAttributes.Bold },
+                    new Label {
+                        Text = "Description:",
+                        FontSize =  Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                        FontAttributes = FontAttributes.Bold, TextColor = Color.White },
                     title
                 }
             };
-            jobDetails.SetBinding<Job>(StackLayout.BackgroundColorProperty, job => job.Status, converter: new JobStatusToColorConverter(useLightTheme: true));
+            jobDetails.SetBinding<Job>(
+                StackLayout.BackgroundColorProperty, 
+                job => job.Status, 
+                converter: new JobStatusToColorConverter(useLightTheme: true));
 
             var rootLayout = new StackLayout()
             {

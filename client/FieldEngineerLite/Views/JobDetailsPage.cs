@@ -11,12 +11,8 @@ namespace FieldEngineerLite.Views
 {	
     public class JobDetailsPage : ContentPage
     {        
-        
-
         public JobDetailsPage()
         {
-
-
             TableSection mainSection = new TableSection("Customer Details");     
             
             mainSection.Add(new DataElementCell("CustomerName", "Customer"));
@@ -41,9 +37,10 @@ namespace FieldEngineerLite.Views
                 RowHeight = 50,
                 ItemTemplate = workRowTemplate
             };
-            workListView.SetBinding<Job>(ListView.ItemsSourceProperty, job => job.Items);            
+            workListView.SetBinding<Job>(ListView.ItemsSourceProperty, job => job.Items);
 
-            var workCell = new ViewCell { View = workListView };            
+            var workCell = new ViewCell { View = workListView };
+       
             workSection.Add(workCell);
 
             var actionsSection = new TableSection("Actions");
@@ -133,14 +130,16 @@ namespace FieldEngineerLite.Views
                     Text = propertyDescription ?? property,
                     FontAttributes = FontAttributes.Bold,
                     WidthRequest = 150,
-                    VerticalOptions = LayoutOptions.CenterAndExpand                
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                    TextColor = Color.White             
                 };
 
                 ValueLabel = new Label {
                     //Font = AppStyle.DefaultFont,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
-                    XAlign = TextAlignment.End
+                    XAlign = TextAlignment.End,
+                    TextColor = Color.White
                 };
                 ValueLabel.SetBinding(Label.TextProperty, property);
 

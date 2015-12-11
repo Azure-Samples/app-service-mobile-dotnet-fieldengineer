@@ -4,11 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using FieldEngineerLite.Helpers;
 using FieldEngineerLite.Models;
-using Microsoft.Azure.AppService;
-using UIKit;
-using HomeKit;
 
 namespace FieldEngineerLite.Views
 {
@@ -69,32 +65,17 @@ namespace FieldEngineerLite.Views
                     syncButton.Text = "Refresh";
                 }
             };
-
-            //var clearButton = new Button
-            //{
-            //    HorizontalOptions = LayoutOptions.CenterAndExpand,
-            //    VerticalOptions = LayoutOptions.CenterAndExpand,
-            //    Font = AppStyle.DefaultFont,
-            //    Text = "Clear",
-            //    WidthRequest = 100
-            //};
-
-            //clearButton.Clicked += async (object sender, EventArgs e) =>
-            //{
-            //    await App.JobService.ClearAllJobs();
-            //    await this.RefreshAsync();
-            //};
             
             this.Title = "Appointments";
 
             var logo = new Image() { Aspect = Aspect.AspectFit };
-            logo.Source = ImageSource.FromFile("Fabrikam-small.png");
+            //logo.Source = ImageSource.FromFile("Fabrikam-small.png");
 
-            var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += async (s, e) => {
-                await App.JobService.EnsureLogin();
-            };
-        logo.GestureRecognizers.Add(tapGestureRecognizer);
+            //var tapGestureRecognizer = new TapGestureRecognizer();
+            //tapGestureRecognizer.Tapped += async (s, e) => {
+            //    await App.JobService.EnsureLogin();
+            //};
+            //logo.GestureRecognizers.Add(tapGestureRecognizer);
 
             this.Content = new StackLayout
             {

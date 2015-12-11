@@ -12,7 +12,7 @@ namespace FieldEngineerLite.Views
         {
             var title = new Label
             {
-                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                //FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Color.White,
                 VerticalOptions = LayoutOptions.Center
