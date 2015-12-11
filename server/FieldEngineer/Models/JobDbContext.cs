@@ -43,7 +43,7 @@ namespace FieldEngineerLiteService.Models
         }
     }
 
-    public class JobDbContextInitializer : DropCreateDatabaseAlways<JobDbContext>
+    public class JobDbContextInitializer : CreateDatabaseIfNotExists<JobDbContext>
     {
         protected override void Seed(JobDbContext context)
         {
