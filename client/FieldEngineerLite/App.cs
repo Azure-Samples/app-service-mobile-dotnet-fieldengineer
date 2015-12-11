@@ -23,13 +23,6 @@ namespace FieldEngineerLite
         {
             MainPage = new JobMasterDetailPage ();
         }
-
-
-
-        /*public static Page GetMainPage()
-        {
-            return 
-        }*/
     }
 
     public static class AppStyle
