@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using FieldEngineerLite.Models;
 using Microsoft.WindowsAzure.MobileServices.Eventing;
+using System.ComponentModel;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace FieldEngineerLite.Views
 {
@@ -12,7 +14,8 @@ namespace FieldEngineerLite.Views
         private const bool DEFAULT_ONLINE_STATE = false;
         public ListView JobList;
         private JobService jobService;
-              
+        private long pendingChanges;
+
         public JobListPage(JobService service)
         {
             this.jobService = service;
@@ -73,22 +76,42 @@ namespace FieldEngineerLite.Views
             //};
             //logo.GestureRecognizers.Add(tapGestureRecognizer);
 
-            this.Content = new StackLayout
-            {
+            var statusBar = new Label { BackgroundColor = Color.Gray, TextColor = Color.White };
+            statusBar.SetBinding(Label.TextProperty, "PendingChanges", stringFormat: "Pending changes: {0}");
+            statusBar.BindingContext = this;
+
+            this.Content = new StackLayout {
                 Orientation = StackOrientation.Vertical,
-                Padding = new Thickness {Top = 15},
+                Padding = new Thickness { Top = 15 },
                 Children = {
                     new StackLayout {
-                        
+
                         Orientation = StackOrientation.Horizontal,
                         HorizontalOptions = LayoutOptions.StartAndExpand,
                         Children = {
                             syncButton, new Label { Text = "   "}, onlineLabel, onlineSwitch
                         }
-                    },                                        
-                    JobList
+                    },
+                    JobList,
+                    new ContentView {
+                        Content = statusBar, Padding = 5, BackgroundColor = Color.Gray,
+                    }
                 }
             };
+        }
+
+        public long PendingChanges
+        {
+            get
+            {
+                return pendingChanges;
+            }
+
+            set
+            {
+                pendingChanges = value;
+                OnPropertyChanged();
+            }
         }
 
         private void StatusObserver(MobileServiceEvent obj)
@@ -105,7 +128,15 @@ namespace FieldEngineerLite.Views
         {
             base.OnAppearing();
             await this.RefreshAsync();
-            jobService.MobileService.EventManager.Subscribe<MobileServiceEvent>(StatusObserver);            
+
+            jobService.MobileService.EventManager.Subscribe<MobileServiceEvent>(StatusObserver);
+            jobService.MobileService.EventManager.Subscribe<StoreOperationCompletedEvent>(StoreOperationEventHandler);
+        }
+
+        private async void StoreOperationEventHandler(StoreOperationCompletedEvent obj)
+        {
+            await Task.Delay(500);
+            PendingChanges = jobService.MobileService.SyncContext.PendingOperations;
         }
 
         public async Task RefreshAsync()

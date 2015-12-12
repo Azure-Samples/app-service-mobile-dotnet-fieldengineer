@@ -28,7 +28,7 @@ namespace FieldEngineerLite
             var store = new MobileServiceSQLiteStore("local.db");
             store.DefineTable<Job>();
 
-            await MobileService.SyncContext.InitializeAsync(store);
+            await MobileService.SyncContext.InitializeAsync(store, StoreTrackingOptions.NotifyLocalAndServerOperations);
             jobTable = MobileService.GetSyncTable<Job>();
         }
 
