@@ -1,28 +1,29 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 
 using Xamarin.Forms.Platform.Android;
 
 namespace FieldEngineerLite.Droid
 {
-    [Activity(Label = "FieldEngineerLite", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : AndroidActivity
+    [Activity(Label = "FieldEngineerLite",
+        Icon = "@drawable/icon",
+        MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+        Theme = "@android:style/Theme.Holo.Light")]
+    public class MainActivity : FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             Xamarin.Forms.Forms.Init(this, bundle);
-            App.JobService.InitializeAsync().Wait();
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             App.UIContext = this;
-            SetPage(App.GetMainPage());
+
+            var app = new App();
+            LoadApplication(app);
         }
     }
 }

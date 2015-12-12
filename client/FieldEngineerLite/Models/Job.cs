@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json;
 
 namespace FieldEngineerLite.Models
 {
-    public class Job
+    public class Job : INotifyPropertyChanged
     {
         public Job()
         {
@@ -26,12 +27,28 @@ namespace FieldEngineerLite.Models
         public string JobNumber { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
-        public string Status { get; set; }
         public string Title { get; set; }
         public string CustomerName { get; set; }
         public string CustomerAddress { get; set; }
         public string CustomerPhoneNumber { get; set; }
         public string WorkPerformed { get; set; }
+
+        private string status;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        public string Status
+        {
+            get { return status; }
+            set
+            {
+                status = value;
+                OnPropertyChanged(nameof(Status));
+            }
+        }
 
         [Version]
         public string Version { get; set; }

@@ -1,121 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using FieldEngineerLite.Helpers;
 using FieldEngineerLite.Models;
-using System.Threading;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Net.Http;
-using Xamarin.Forms;
-using System.Reflection;
-
-using Microsoft.Azure.AppService;
-
+using Microsoft.WindowsAzure.MobileServices.Eventing;
+using System.Diagnostics;
 
 namespace FieldEngineerLite
 {
-
     public class JobService
     {
-        #region Member variables
-        
         public bool LoginInProgress = false;
         public bool Online = false;        
         
-        #endregion
-        
-        // 1. add client initializer
         public IMobileServiceClient MobileService = null;
-        public static string GatewayURL= "{gatewayURL}";
-        public static string MobileAppURL = "{mobileappURL}";
-        public static string MobileAppName = "{mobileappname}";
-        
-        public AppServiceClient AppService = 
-            new AppServiceClient(GatewayURL);
-        // 2. add sync table
         private IMobileServiceSyncTable<Job> jobTable;
-          
-        
+                  
         public async Task InitializeAsync()
         {
-            this.MobileService = AppService.CreateMobileServiceClient(
-                MobileAppURL,
-                "");
-            // 3. initialize local store
+            this.MobileService = 
+                new MobileServiceClient("https://fieldengineerlite-code.azurewebsites.net/", 
+                new LoggingHandler(true));
 
-            var store = new MobileServiceSQLiteStore("local-db-" + MobileAppName);
+            var store = new MobileServiceSQLiteStore("local.db");
             store.DefineTable<Job>();
 
             await MobileService.SyncContext.InitializeAsync(store);
-
             jobTable = MobileService.GetSyncTable<Job>();
         }
 
         public async Task<IEnumerable<Job>> ReadJobs(string search)
         {
-            // 4. read from local db
-            
-            var query = jobTable.CreateQuery();
-            if (string.IsNullOrEmpty(search) == false)
-            {
-                query = query.Where(job => (job.Title == search));
-            }
-            
-            return await query.ToEnumerableAsync();
+            return await jobTable.ToEnumerableAsync();
         }
 
         public async Task UpdateJobAsync(Job job)
         {
             job.Status = Job.CompleteStatus;
             
-            // 5. update local db
             await jobTable.UpdateAsync(job);
+            
+            // trigger an event so that the job list is refreshed
+            await MobileService.EventManager.PublishAsync(new MobileServiceEvent("JobChanged"));
         }
 
         public async Task SyncAsync()
         {
-            // 7. add auth
-
-            await EnsureLogin();
-            //5. add sync
             try
             {
                 await this.MobileService.SyncContext.PushAsync();
-
-                var query = jobTable.CreateQuery()
-                    .Where(job => job.AgentId == "2");
-
-                await jobTable.PullAsync(null, query);
+                await jobTable.PullAsync(null, jobTable.CreateQuery());
             }
-            catch (Exception)
-            { 
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
             }
-        }
-        
-        public async Task EnsureLogin()
-        {
-            LoginInProgress = true;
-            while (this.AppService.CurrentUser == null) {
-                //await this.AppService.LoginAsync(
-                try 
-                {
-                    await this.AppService.LoginAsync (App.UIContext, 
-                        MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory.ToString());
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine("failed to authenticate: " + ex.Message);
-                }
-               
-            }
-
-            LoginInProgress = false;
-
         }
 
         public async Task CompleteJobAsync(Job job)
@@ -125,5 +67,26 @@ namespace FieldEngineerLite
             if (Online)
                 await this.SyncAsync();
         }
+
+
+        //public async Task EnsureLogin()
+        //{
+        //    LoginInProgress = true;
+        //    while (this.AppService.CurrentUser == null) {
+        //        //await this.AppService.LoginAsync(
+        //        try 
+        //        {
+        //            await this.AppService.LoginAsync (App.UIContext, 
+        //                MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory.ToString());
+        //        }
+        //        catch(Exception ex)
+        //        {
+        //            Console.WriteLine("failed to authenticate: " + ex.Message);
+        //        }
+
+        //    }
+
+        //    LoginInProgress = false;
+        //}
     }
 }

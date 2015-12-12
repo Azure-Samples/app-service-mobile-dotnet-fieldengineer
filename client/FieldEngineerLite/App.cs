@@ -17,19 +17,11 @@ namespace FieldEngineerLite
     public class App : Application
     {
         public static UIContext UIContext { get; set; }
-        public static JobService JobService = new JobService();
-
+        
         public App()
         {
             MainPage = new JobMasterDetailPage ();
         }
-
-
-
-        /*public static Page GetMainPage()
-        {
-            return 
-        }*/
     }
 
     public static class AppStyle

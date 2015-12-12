@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
-
 
 namespace FieldEngineerLite.Helpers
 {
@@ -23,7 +20,7 @@ namespace FieldEngineerLite.Helpers
 
         protected override IList<Newtonsoft.Json.Linq.JObject> ExecuteQuery(string tableName, string sql, IDictionary<string, object> parameters)
         {
-            Console.WriteLine (sql);   
+            Debug.WriteLine (sql);   
 
             if(logParameters)
                 PrintDictionary (parameters);
@@ -33,7 +30,7 @@ namespace FieldEngineerLite.Helpers
             if (logResults && result != null) 
             {
                 foreach (var token in result)
-                    Console.WriteLine (token);
+                    Debug.WriteLine (token);
             }
 
             return result;
@@ -41,7 +38,7 @@ namespace FieldEngineerLite.Helpers
 
         protected override void ExecuteNonQuery(string sql, IDictionary<string, object> parameters)
         {
-            Console.WriteLine (sql);
+            Debug.WriteLine (sql);
 
             if(logParameters)
                 PrintDictionary (parameters);
@@ -55,7 +52,7 @@ namespace FieldEngineerLite.Helpers
                 return;
 
             foreach (var pair in dictionary)
-                Console.WriteLine ("{0}:{1}", pair.Key, pair.Value);
+                Debug.WriteLine ("{0}:{1}", pair.Key, pair.Value);
         }
     }
 
@@ -70,22 +67,22 @@ namespace FieldEngineerLite.Helpers
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
         {
-            Console.WriteLine("Request: {0} {1}", request.Method, request.RequestUri.ToString());
+            Debug.WriteLine("Request: {0} {1}", request.Method, request.RequestUri.ToString());
 
             if (logRequestResponseBody && request.Content != null) 
             {
                 var requestContent = await request.Content.ReadAsStringAsync ();
-                Console.WriteLine (requestContent);
+                Debug.WriteLine (requestContent);
             }
 
             var response = await base.SendAsync(request, cancellationToken);
 
-            Console.WriteLine ("Response: {0}", response.StatusCode);
+            Debug.WriteLine ("Response: {0}", response.StatusCode);
 
             if (logRequestResponseBody) 
             {
                 var responseContent = await response.Content.ReadAsStringAsync ();
-                Console.WriteLine (responseContent);
+                Debug.WriteLine (responseContent);
             }
 
             return response;

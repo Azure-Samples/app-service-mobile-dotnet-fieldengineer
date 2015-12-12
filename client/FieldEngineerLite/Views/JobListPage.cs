@@ -1,27 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using FieldEngineerLite.Helpers;
 using FieldEngineerLite.Models;
-using Microsoft.Azure.AppService;
-using UIKit;
-using HomeKit;
+using Microsoft.WindowsAzure.MobileServices.Eventing;
 
 namespace FieldEngineerLite.Views
 {
     public class JobListPage : ContentPage
     {
-
         private const bool DEFAULT_ONLINE_STATE = false;
-
         public ListView JobList;
-
-        public JobListPage()
+        private JobService jobService;
+              
+        public JobListPage(JobService service)
         {
-
+            this.jobService = service;
+            
             JobList = new ListView
             {
                 HasUnevenRows = true,
@@ -31,18 +26,18 @@ namespace FieldEngineerLite.Views
                 ItemTemplate = new DataTemplate(typeof(JobCell))
             };
 
-            var onlineLabel = new Label { Text = "Online", Font = AppStyle.DefaultFont, YAlign = TextAlignment.Center };
+            var onlineLabel = new Label { Text = "Online", VerticalTextAlignment = TextAlignment.Center };
             var onlineSwitch = new Switch { IsToggled = DEFAULT_ONLINE_STATE, VerticalOptions = LayoutOptions.Center };
 
-            App.JobService.Online = onlineSwitch.IsToggled;
+            jobService.Online = onlineSwitch.IsToggled;
 
             onlineSwitch.Toggled += async (sender, e) =>
             {
-                App.JobService.Online = onlineSwitch.IsToggled;
+                jobService.Online = onlineSwitch.IsToggled;
 
                 if (onlineSwitch.IsToggled)
                 {
-                    await App.JobService.SyncAsync();
+                    await jobService.SyncAsync();
                     await this.RefreshAsync();
                 }
             };
@@ -51,9 +46,9 @@ namespace FieldEngineerLite.Views
             {
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                Font = AppStyle.DefaultFont,
                 Text = "Refresh",
-                WidthRequest = 100,
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Button)),
+                WidthRequest = 120,
             };
 
             syncButton.Clicked += async (object sender, EventArgs e) =>
@@ -61,7 +56,7 @@ namespace FieldEngineerLite.Views
                 try
                 {
                     syncButton.Text = "Refreshing...";
-                    await App.JobService.SyncAsync();
+                    await jobService.SyncAsync();
                     await this.RefreshAsync();
                 }
                 finally
@@ -69,82 +64,55 @@ namespace FieldEngineerLite.Views
                     syncButton.Text = "Refresh";
                 }
             };
-
-            //var clearButton = new Button
-            //{
-            //    HorizontalOptions = LayoutOptions.CenterAndExpand,
-            //    VerticalOptions = LayoutOptions.CenterAndExpand,
-            //    Font = AppStyle.DefaultFont,
-            //    Text = "Clear",
-            //    WidthRequest = 100
-            //};
-
-            //clearButton.Clicked += async (object sender, EventArgs e) =>
-            //{
-            //    await App.JobService.ClearAllJobs();
-            //    await this.RefreshAsync();
-            //};
             
             this.Title = "Appointments";
 
-            var logo = new Image() { Aspect = Aspect.AspectFit };
-            logo.Source = ImageSource.FromFile("Fabrikam-small.png");
-
-            var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += async (s, e) => {
-                await App.JobService.EnsureLogin();
-            };
-        logo.GestureRecognizers.Add(tapGestureRecognizer);
+            //var tapGestureRecognizer = new TapGestureRecognizer();
+            //tapGestureRecognizer.Tapped += async (s, e) => {
+            //    await App.JobService.EnsureLogin();
+            //};
+            //logo.GestureRecognizers.Add(tapGestureRecognizer);
 
             this.Content = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
                 Padding = new Thickness {Top = 15},
                 Children = {
-                    //searchBar,
                     new StackLayout {
                         
                         Orientation = StackOrientation.Horizontal,
                         HorizontalOptions = LayoutOptions.StartAndExpand,
                         Children = {
-                            logo,
                             syncButton, new Label { Text = "   "}, onlineLabel, onlineSwitch
                         }
                     },                                        
                     JobList
                 }
             };
-            //this.RefreshAsync().Wait();
         }
 
-        public async Task FakeIt()
+        private void StatusObserver(MobileServiceEvent obj)
         {
-            while (true)
-            {
-                if (App.JobService.Online)
-                {
-                    await App.JobService.SyncAsync();
-                    await Task.Delay(3000);
+            // Refresh the UI if a job was edited on the detail page
+            if (obj.Name == "JobChanged") {
+                Device.BeginInvokeOnMainThread(async () => {
                     await RefreshAsync();
-                }
-                await Task.Delay(3000);
+                });
             }
         }
 
-        Task FakeItTask;
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             await this.RefreshAsync();
-
-            FakeItTask = FakeIt();
-            System.Diagnostics.Debug.WriteLine(FakeItTask);
+            jobService.MobileService.EventManager.Subscribe<MobileServiceEvent>(StatusObserver);            
         }
 
         public async Task RefreshAsync()
         {
             //if (App.JobService.LoginInProgress == true) return;
-            var groups = from job in await App.JobService.ReadJobs("")
+
+            var groups = from job in await jobService.ReadJobs("")
                          group job by job.Status into jobGroup
                          select jobGroup;
 

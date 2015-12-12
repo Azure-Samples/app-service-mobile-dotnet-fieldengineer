@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 using FieldEngineerLite.Helpers;
 using FieldEngineerLite.Models;
@@ -11,15 +8,14 @@ namespace FieldEngineerLite.Views
     {
         public JobCell()
         {
-            var jobHeader = new JobHeaderView();
+            var jobHeader = new JobHeaderView(leftPadding: 5);
 
-            var title = new Label();
-            //title.Font = AppStyle.DefaultFont;
+            var title = new Label { FontSize =  Device.GetNamedSize(NamedSize.Small, typeof(Label)) };
             title.SetBinding<Job>(Label.TextProperty, job => job.Title);
 
-            var customer = new Label();
-            //customer.Font = AppStyle.DefaultFont;
-            customer.SetBinding<Job>(Label.TextProperty, job => job.CustomerName);            
+            var customer = new Label { FontSize =  Device.GetNamedSize(NamedSize.Small, typeof(Label)) };
+            customer.SetBinding<Job>(Label.TextProperty, job => job.CustomerName);  
+            
 
             var jobDetails = new StackLayout
             {
@@ -31,15 +27,22 @@ namespace FieldEngineerLite.Views
                     {
                         Orientation = StackOrientation.Horizontal,
                         Children = {
-                            new Label { Text = "Customer:", FontAttributes = FontAttributes.Bold },
+                            new Label {
+                                Text = "Customer:",
+                                FontSize =  Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                                FontAttributes = FontAttributes.Bold
+                            },
                             customer
                         }
                     },
-                    new Label { Text = "Description:", FontAttributes = FontAttributes.Bold },
+                    new Label {
+                        Text = "Description:",
+                        FontSize =  Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                        FontAttributes = FontAttributes.Bold
+                    },
                     title
                 }
             };
-            jobDetails.SetBinding<Job>(StackLayout.BackgroundColorProperty, job => job.Status, converter: new JobStatusToColorConverter(useLightTheme: true));
 
             var rootLayout = new StackLayout()
             {
@@ -52,7 +55,7 @@ namespace FieldEngineerLite.Views
                 }
             };
 
-            this.Height = 130;
+            this.Height = 120;
             this.View = rootLayout;
         }
     }
