@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Xamarin.Forms;
 using FieldEngineerLite.Models;
 using FieldEngineerLite.Views;
@@ -21,11 +16,8 @@ namespace FieldEngineerLite
 
     public class JobMasterDetailPage : MasterDetailPage
     {
-     
-
         public JobMasterDetailPage()
         {
-       
             JobListPage listPage = new JobListPage();
             listPage.JobList.ItemSelected += (sender, e) =>
             {
@@ -43,7 +35,6 @@ namespace FieldEngineerLite
 
             details.Content.IsVisible = false;
             Detail = new MyNavigationPage(details);
-            //this.IsPresented = true;
         }
 
         protected async override void OnAppearing()

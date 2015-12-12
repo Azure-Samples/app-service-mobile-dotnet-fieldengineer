@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 using FieldEngineerLite.Helpers;
 using FieldEngineerLite.Models;
 
 namespace FieldEngineerLite.Views
-{	
+{
     public class JobDetailsPage : ContentPage
     {        
         public JobDetailsPage()
@@ -28,6 +24,7 @@ namespace FieldEngineerLite.Views
             var workRowTemplate = new DataTemplate(typeof(SwitchCell));            
             workRowTemplate.SetBinding(SwitchCell.TextProperty, "Name");
             workRowTemplate.SetBinding(SwitchCell.OnProperty, "Completed");
+            //workRowTemplate.SetValue(TextCell.TextColorProperty, Color.White);
 
             // I don't have images working on Android yet
             //if (Device.OS == TargetPlatform.iOS) 			
@@ -58,7 +55,6 @@ namespace FieldEngineerLite.Views
             
             var table = new TableView
             {
-                //BackgroundColor = Color.Transparent,
                 Intent = TableIntent.Form,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HasUnevenRows = true,
@@ -68,24 +64,16 @@ namespace FieldEngineerLite.Views
                 }
             };
 
-            table.SetBinding<Job>(TableView.BackgroundColorProperty, job => job.Status, converter: new JobStatusToColorConverter(useLightTheme: true));
+            //table.SetBinding<Job>(TableView.BackgroundColorProperty, job => job.Status, converter: new JobStatusToColorConverter(useLightTheme: true));
             
             this.Title = "Appointment Details";
 
-            //this.BackgroundImage = "Fabrikam-568h.png";
-            //var background = new Image() { Aspect = Aspect.AspectFit };
-            //background.Source = ImageSource.FromFile("Fabrikam-568h");
-
             this.Content = new ScrollView {
-                //VerticalOptions = LayoutOptions.Fill,
                 Orientation = ScrollOrientation.Vertical,
-
                 Content = new StackLayout
                 {
-                    //BackgroundColor = Color.Transparent,
                     Orientation = StackOrientation.Vertical,
-                    Children = { new JobHeaderView(), table }
-
+                    Children = { new JobHeaderView(leftPadding: 10, colorBackground: true), table }
                 }
             };
 
@@ -129,24 +117,20 @@ namespace FieldEngineerLite.Views
                 DescriptionLabel = new Label {
                     Text = propertyDescription ?? property,
                     FontAttributes = FontAttributes.Bold,
-                    WidthRequest = 150,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
-                    TextColor = Color.White             
                 };
 
                 ValueLabel = new Label {
-                    //Font = AppStyle.DefaultFont,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
-                    XAlign = TextAlignment.End,
-                    TextColor = Color.White
+                    HorizontalTextAlignment = TextAlignment.End,
                 };
                 ValueLabel.SetBinding(Label.TextProperty, property);
 
                 this.View = new StackLayout
                 {
                     Orientation = StackOrientation.Horizontal,
-                    Padding = 10,
+                    Padding = new Thickness(15, 10),
                     Children = { DescriptionLabel, ValueLabel }
                 };
             }

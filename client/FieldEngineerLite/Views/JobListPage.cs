@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using FieldEngineerLite.Models;
+using Microsoft.WindowsAzure.MobileServices.Eventing;
 
 namespace FieldEngineerLite.Views
 {
     public class JobListPage : ContentPage
     {
-
         private const bool DEFAULT_ONLINE_STATE = false;
-
         public ListView JobList;
 
         public JobListPage()
         {
-
             JobList = new ListView
             {
                 HasUnevenRows = true,
@@ -27,10 +23,11 @@ namespace FieldEngineerLite.Views
                 ItemTemplate = new DataTemplate(typeof(JobCell))
             };
 
-            var onlineLabel = new Label { Text = "Online", Font = AppStyle.DefaultFont, YAlign = TextAlignment.Center };
+            var onlineLabel = new Label { Text = "Online", VerticalTextAlignment = TextAlignment.Center };
             var onlineSwitch = new Switch { IsToggled = DEFAULT_ONLINE_STATE, VerticalOptions = LayoutOptions.Center };
 
             App.JobService.Online = onlineSwitch.IsToggled;
+            App.JobService.MobileService.EventManager.Subscribe<MobileServiceEvent>(StatusObserver);
 
             onlineSwitch.Toggled += async (sender, e) =>
             {
@@ -68,9 +65,6 @@ namespace FieldEngineerLite.Views
             
             this.Title = "Appointments";
 
-            var logo = new Image() { Aspect = Aspect.AspectFit };
-            //logo.Source = ImageSource.FromFile("Fabrikam-small.png");
-
             //var tapGestureRecognizer = new TapGestureRecognizer();
             //tapGestureRecognizer.Tapped += async (s, e) => {
             //    await App.JobService.EnsureLogin();
@@ -82,49 +76,39 @@ namespace FieldEngineerLite.Views
                 Orientation = StackOrientation.Vertical,
                 Padding = new Thickness {Top = 15},
                 Children = {
-                    //searchBar,
                     new StackLayout {
                         
                         Orientation = StackOrientation.Horizontal,
                         HorizontalOptions = LayoutOptions.StartAndExpand,
                         Children = {
-                            logo,
                             syncButton, new Label { Text = "   "}, onlineLabel, onlineSwitch
                         }
                     },                                        
                     JobList
                 }
             };
-            //this.RefreshAsync().Wait();
         }
 
-        public async Task FakeIt()
+        private void StatusObserver(MobileServiceEvent obj)
         {
-            while (true)
-            {
-                if (App.JobService.Online)
-                {
-                    await App.JobService.SyncAsync();
-                    await Task.Delay(3000);
+            // Refresh the UI if a job was edited on the detail page
+            if (obj.Name == "JobChanged") {
+                Device.BeginInvokeOnMainThread(async () => {
                     await RefreshAsync();
-                }
-                await Task.Delay(3000);
+                });
             }
         }
 
-        Task FakeItTask;
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             await this.RefreshAsync();
-
-            FakeItTask = FakeIt();
-            System.Diagnostics.Debug.WriteLine(FakeItTask);
         }
 
         public async Task RefreshAsync()
         {
             //if (App.JobService.LoginInProgress == true) return;
+
             var groups = from job in await App.JobService.ReadJobs("")
                          group job by job.Status into jobGroup
                          select jobGroup;
