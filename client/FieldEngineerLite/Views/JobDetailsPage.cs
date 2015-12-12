@@ -7,8 +7,11 @@ namespace FieldEngineerLite.Views
 {
     public class JobDetailsPage : ContentPage
     {        
-        public JobDetailsPage()
+        private JobService jobService;
+        
+        public JobDetailsPage(JobService service)
         {
+            this.jobService = service;
             TableSection mainSection = new TableSection("Customer Details");     
             
             mainSection.Add(new DataElementCell("CustomerName", "Customer"));
@@ -63,8 +66,6 @@ namespace FieldEngineerLite.Views
                     mainSection, workSection, actionsSection, 
                 }
             };
-
-            //table.SetBinding<Job>(TableView.BackgroundColorProperty, job => job.Status, converter: new JobStatusToColorConverter(useLightTheme: true));
             
             this.Title = "Appointment Details";
 
@@ -95,7 +96,7 @@ namespace FieldEngineerLite.Views
                     job.WorkPerformed += " " + e.Name + ";";
                 }
             }
-            await App.JobService.CompleteJobAsync(job);
+            await jobService.CompleteJobAsync(job);
 
             // Force a refresh
             this.BindingContext = null;

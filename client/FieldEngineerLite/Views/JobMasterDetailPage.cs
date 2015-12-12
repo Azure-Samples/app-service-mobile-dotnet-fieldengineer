@@ -16,9 +16,11 @@ namespace FieldEngineerLite
 
     public class JobMasterDetailPage : MasterDetailPage
     {
+        private JobService jobService = new JobService();
+        
         public JobMasterDetailPage()
         {
-            JobListPage listPage = new JobListPage();
+            JobListPage listPage = new JobListPage(jobService);
             listPage.JobList.ItemSelected += (sender, e) =>
             {
                 var selectedJob = e.SelectedItem as Job;
@@ -31,7 +33,7 @@ namespace FieldEngineerLite
             var listNavigationPage = new MyNavigationPage(listPage);
             listNavigationPage.Title = "Appointments";
             Master = listNavigationPage;
-            JobDetailsPage details = new JobDetailsPage();
+            JobDetailsPage details = new JobDetailsPage(jobService);
 
             details.Content.IsVisible = false;
             Detail = new MyNavigationPage(details);
@@ -40,8 +42,9 @@ namespace FieldEngineerLite
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            await jobService.InitializeAsync();
             
-            var jobs = await App.JobService.ReadJobs("");
+            var jobs = await jobService.ReadJobs("");
             if (jobs.Count() > 0)
             {
                 Job job = jobs.First();
@@ -51,7 +54,7 @@ namespace FieldEngineerLite
 
         public void NavigateTo(Job item)
         {
-            JobDetailsPage page = new JobDetailsPage();
+            JobDetailsPage page = new JobDetailsPage(jobService);
             page.BindingContext = item;
             Detail = new NavigationPage(page);
             IsPresented = false;

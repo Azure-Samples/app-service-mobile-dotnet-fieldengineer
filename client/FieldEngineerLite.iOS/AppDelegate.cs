@@ -33,13 +33,9 @@ namespace FieldEngineerLite.iOS
 
             var myapp = new App();
           
-            App.JobService.InitializeAsync().Wait();
-
             LoadApplication(myapp);
-            
 
             var success = base.FinishedLaunching (app, options);
-
             App.UIContext = UIApplication.SharedApplication.KeyWindow.RootViewController;
             
             return success;

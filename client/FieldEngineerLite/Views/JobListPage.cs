@@ -11,9 +11,12 @@ namespace FieldEngineerLite.Views
     {
         private const bool DEFAULT_ONLINE_STATE = false;
         public ListView JobList;
-
-        public JobListPage()
+        private JobService jobService;
+              
+        public JobListPage(JobService service)
         {
+            this.jobService = service;
+            
             JobList = new ListView
             {
                 HasUnevenRows = true,
@@ -26,16 +29,15 @@ namespace FieldEngineerLite.Views
             var onlineLabel = new Label { Text = "Online", VerticalTextAlignment = TextAlignment.Center };
             var onlineSwitch = new Switch { IsToggled = DEFAULT_ONLINE_STATE, VerticalOptions = LayoutOptions.Center };
 
-            App.JobService.Online = onlineSwitch.IsToggled;
-            App.JobService.MobileService.EventManager.Subscribe<MobileServiceEvent>(StatusObserver);
+            jobService.Online = onlineSwitch.IsToggled;
 
             onlineSwitch.Toggled += async (sender, e) =>
             {
-                App.JobService.Online = onlineSwitch.IsToggled;
+                jobService.Online = onlineSwitch.IsToggled;
 
                 if (onlineSwitch.IsToggled)
                 {
-                    await App.JobService.SyncAsync();
+                    await jobService.SyncAsync();
                     await this.RefreshAsync();
                 }
             };
@@ -54,7 +56,7 @@ namespace FieldEngineerLite.Views
                 try
                 {
                     syncButton.Text = "Refreshing...";
-                    await App.JobService.SyncAsync();
+                    await jobService.SyncAsync();
                     await this.RefreshAsync();
                 }
                 finally
@@ -103,13 +105,14 @@ namespace FieldEngineerLite.Views
         {
             base.OnAppearing();
             await this.RefreshAsync();
+            jobService.MobileService.EventManager.Subscribe<MobileServiceEvent>(StatusObserver);            
         }
 
         public async Task RefreshAsync()
         {
             //if (App.JobService.LoginInProgress == true) return;
 
-            var groups = from job in await App.JobService.ReadJobs("")
+            var groups = from job in await jobService.ReadJobs("")
                          group job by job.Status into jobGroup
                          select jobGroup;
 
