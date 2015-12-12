@@ -21,6 +21,22 @@ namespace FieldEngineerLiteService.DataObjects
 
         public string WorkPerformed { get; set; }
 
+        #if TRY_APP_SERVICE
+        // SQL Compact Edition does not support the DateTimeOffset type.
+        // These are simple backing properties that store these values using the DateTime type instead.
+        public DateTime __createdAtDateTime
+        {
+            get { return CreatedAt.HasValue ? CreatedAt.Value.DateTime : DateTime.Now; }
+            set { CreatedAt = value; }
+        }
+
+        public DateTime __updatedAtDateTime
+        {
+            get { return UpdatedAt.HasValue ? UpdatedAt.Value.DateTime : DateTime.Now; }
+            set { UpdatedAt = value; }
+        }
+        #endif
+
         public Job()
         {
             Id = Guid.NewGuid().ToString("N");

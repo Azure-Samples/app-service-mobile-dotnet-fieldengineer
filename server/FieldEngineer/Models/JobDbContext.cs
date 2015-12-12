@@ -20,7 +20,12 @@ namespace FieldEngineerLiteService.Models
         // To enable Entity Framework migrations in the cloud, please ensure that the 
         // service name, set by the 'MS_MobileServiceName' AppSettings in the local 
         // Web.config, is the same as the service name when hosted in Azure.
+
+#if TRY_APP_SERVICE
+        private const string connectionStringName = "Name=MS_TryAppService_TableConnectionString";
+#else
         private const string connectionStringName = "Name=MS_TableConnectionString";
+#endif
 
         public JobDbContext()
             : base(connectionStringName)
@@ -31,19 +36,24 @@ namespace FieldEngineerLiteService.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            string schema = "mobile";
-            if (!string.IsNullOrEmpty(schema))
-            {
-                modelBuilder.HasDefaultSchema("mobile");
-            }
-
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
+
+#if TRY_APP_SERVICE
+            // The EntityFramework SQL Compact provider does not support the DateTimeOffset type
+            modelBuilder.Types<Job>().Configure(x => x.Ignore(prop => prop.CreatedAt));
+            modelBuilder.Types<Job>().Configure(x => x.Ignore(prop => prop.UpdatedAt));
+#endif
+
         }
     }
 
+#if TRY_APP_SERVICE
+    public class JobDbContextInitializer : DropCreateDatabaseAlways<JobDbContext>
+#else
     public class JobDbContextInitializer : CreateDatabaseIfNotExists<JobDbContext>
+#endif
     {
         protected override void Seed(JobDbContext context)
         {
