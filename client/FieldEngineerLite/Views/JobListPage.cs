@@ -46,9 +46,9 @@ namespace FieldEngineerLite.Views
             {
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
-                Font = AppStyle.DefaultFont,
                 Text = "Refresh",
-                WidthRequest = 100,
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Button)),
+                WidthRequest = 120,
             };
 
             syncButton.Clicked += async (object sender, EventArgs e) =>

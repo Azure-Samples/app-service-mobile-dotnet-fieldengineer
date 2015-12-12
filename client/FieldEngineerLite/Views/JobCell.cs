@@ -10,11 +10,12 @@ namespace FieldEngineerLite.Views
         {
             var jobHeader = new JobHeaderView(leftPadding: 5);
 
-            var title = new Label();
+            var title = new Label { FontSize =  Device.GetNamedSize(NamedSize.Small, typeof(Label)) };
             title.SetBinding<Job>(Label.TextProperty, job => job.Title);
 
-            var customer = new Label();
-            customer.SetBinding<Job>(Label.TextProperty, job => job.CustomerName);            
+            var customer = new Label { FontSize =  Device.GetNamedSize(NamedSize.Small, typeof(Label)) };
+            customer.SetBinding<Job>(Label.TextProperty, job => job.CustomerName);  
+            
 
             var jobDetails = new StackLayout
             {
