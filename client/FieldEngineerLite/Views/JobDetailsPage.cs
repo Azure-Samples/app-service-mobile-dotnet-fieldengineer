@@ -12,6 +12,9 @@ namespace FieldEngineerLite.Views
         public JobDetailsPage(JobService service)
         {
             this.jobService = service;
+
+            this.Title = "Appointment Details";
+
             TableSection mainSection = new TableSection("Customer Details");     
             
             mainSection.Add(new DataElementCell("CustomerName", "Customer"));
@@ -67,8 +70,6 @@ namespace FieldEngineerLite.Views
                 }
             };
             
-            this.Title = "Appointment Details";
-
             this.Content = new ScrollView {
                 Orientation = ScrollOrientation.Vertical,
                 Content = new StackLayout

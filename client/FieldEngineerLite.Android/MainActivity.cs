@@ -6,21 +6,19 @@ using Xamarin.Forms.Platform.Android;
 
 namespace FieldEngineerLite.Droid
 {
-    [Activity(Label = "My Appointments",
+    [Activity(Label = "FieldEngineerLite",
         Icon = "@drawable/icon",
         MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         Theme = "@android:style/Theme.Holo.Light")]
     public class MainActivity : FormsApplicationActivity
     {
-        protected override async void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             Xamarin.Forms.Forms.Init(this, bundle);
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
-
-            await App.JobService.InitializeAsync();
 
             App.UIContext = this;
 
