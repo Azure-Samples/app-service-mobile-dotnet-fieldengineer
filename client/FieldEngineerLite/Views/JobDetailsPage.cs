@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using FieldEngineerLite.Helpers;
 using FieldEngineerLite.Models;
+using System.Linq;
 
 namespace FieldEngineerLite.Views
 {
@@ -89,14 +90,9 @@ namespace FieldEngineerLite.Views
         private async Task CompleteJobAsync()
         {
             var job = this.SelectedJob;
-            job.WorkPerformed = "";
-            foreach (WorkItem e in job.Items)
-            {
-                if (e.Completed)
-                {
-                    job.WorkPerformed += " " + e.Name + ";";
-                }
-            }
+
+            job.WorkPerformed = string.Join(";", job.Items.Where(i => i.Completed).Select(i => i.Name));
+
             await jobService.CompleteJobAsync(job);
 
             // Force a refresh
