@@ -49,14 +49,17 @@ namespace FieldEngineerLiteService.Models
         {
             List<Job> jobs = new List<Job>
             {
-                new Job(),
-                new Job()
+                new Job {Title = "Install Deluxe DVR box", CustomerName = "Chris Anderson", CustomerAddress = "123 Fake St", CustomerPhoneNumber = "3079876543"},
+                new Job {Title = "Cable box outside is missing", CustomerName = "Kirill Gavrylyuk", CustomerAddress = "987 Real St", CustomerPhoneNumber = "4251234567"},
+                new Job {Title = "Add Cable to new room", CustomerName = "Donna Malayeri", CustomerAddress = "456 3rd Dimension", CustomerPhoneNumber = "7860987432"},
+                new Job {Title = "Approve free Cable for my employees", CustomerName = "Bill Staples", CustomerAddress = "777 Best Boss Dr.", CustomerPhoneNumber = "4259829322"}
             };
 
             foreach (Job job in jobs)
             {
                 context.Set<Job>().Add(job);
             }
+            
             base.Seed(context);
         }
     }
