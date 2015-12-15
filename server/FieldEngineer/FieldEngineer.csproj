@@ -305,6 +305,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+    <ItemGroup>
+    <Content Include="App_Data\Placeholder.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
