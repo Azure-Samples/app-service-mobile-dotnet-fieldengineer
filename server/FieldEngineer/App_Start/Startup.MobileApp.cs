@@ -17,6 +17,8 @@ namespace FieldEngineer
         {
             HttpConfiguration config = new HttpConfiguration();
 
+            config.EnableSystemDiagnosticsTracing();
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
