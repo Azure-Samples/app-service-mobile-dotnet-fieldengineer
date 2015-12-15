@@ -1,10 +1,11 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FieldEngineerLiteService.DataObjects
 {
-    public class Job : EntityData
+    public class Job : ITableData
     {
         public string AgentId { get; set; }
 
@@ -20,6 +21,24 @@ namespace FieldEngineerLiteService.DataObjects
         public string CustomerPhoneNumber { get; set; }
 
         public string WorkPerformed { get; set; }
+
+        #region System properties
+        public string Id { get; set; }
+
+        public byte[] Version { get; set; }
+
+        #if TRY_APP_SERVICE
+        [NotMapped]
+        #endif        
+        public DateTimeOffset? CreatedAt { get; set; }
+
+        #if TRY_APP_SERVICE
+        [NotMapped]
+        #endif
+        public DateTimeOffset? UpdatedAt { get; set; }
+
+        public bool Deleted { get; set; }
+        #endregion
 
         #if TRY_APP_SERVICE
         // SQL Compact Edition does not support the DateTimeOffset type.
