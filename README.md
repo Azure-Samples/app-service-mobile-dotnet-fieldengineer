@@ -1,3 +1,9 @@
+---
+services: app-service\mobile
+platforms: dotnet
+author: lindydonna
+---
+
 # Field Engineer 
 **Azure Mobile Apps Sample**
 
@@ -11,7 +17,9 @@ This is a demo where we show off some great features of Azure Mobile Apps and Ap
 
 ### Demo
 
-The first step of the demo is deploying the environment and code. Checkout the **[Deploying](#deploying)** section below.
+The first step of the demo is deploying the environment and code. Checkout the **[Deploying](#deploying)** section below. Or, just click this button!
+
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
 Once you've refreshed the client to get all remote changes, you'll see all the jobs you have waiting to be fulfilled. At this point, you can disconnect your internet and make some changes. All your changes will be saved through a restart of the app. 
 
@@ -27,10 +35,13 @@ If you visit the admin page that comes with your site ({sitename}.azurewebsites.
  - [Azure Mobile Apps on Azure.com](https://azure.microsoft.com/en-us/services/app-service/mobile/)
  - [Kirill Gavrylyuk giving this demo on Azure Fridays](https://channel9.msdn.com/Shows/Azure-Friday/Azure-App-Service-Mobile-Apps-with-Kirill-Gavrylyuk)
 
-
 ## Deploying
 
-### Full Demo
+Just click this button to deploy!
+
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+
+### Manual deployment - full demo
 
 The easiest way to deploy is to use the Continuous Integration feature of App Service.
 
@@ -55,7 +66,7 @@ To set up this version, after step #2 above, add an app setting with key `TRY_AP
 ### Client project
 
 Requirements:
- - OSX w/ Xamarin Studio
+ - Xamarin Studio running on Mac OS X
  - Azure Account (for a free trial, use [Try App Service](https://aka.ms/trymobile) and the instructions there)
 
 Steps:
