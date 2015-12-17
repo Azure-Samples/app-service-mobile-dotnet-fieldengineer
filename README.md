@@ -21,6 +21,8 @@ The first step of the demo is deploying the environment and code. Checkout the *
 
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
+Alternatively, you can deploy using the Azure Portal. [Click here to deploy](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flindydonna%2Ffieldengineer%2Fmaster%2Fazuredeploy.json). Note: you can set the parameter **useSQLCE** to 1 or 0 to specify if you want to use SQLCE or a SQL Azure database. However, this template always creates a SQL Azure Database even if you set the SQLCE parameter to 1.
+
 Once you've refreshed the client to get all remote changes, you'll see all the jobs you have waiting to be fulfilled. At this point, you can disconnect your internet and make some changes. All your changes will be saved through a restart of the app. 
 
 If you visit the admin page that comes with your site ({sitename}.azurewebsites.net/admin), you can see that none of the records have been updated. If you connect to the internet on your device again and refresh, your changes will sync to the server. You can see those changes reflected via the admin portal.
