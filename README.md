@@ -1,6 +1,6 @@
 ---
 services: app-service\mobile
-platforms: dotnet
+platforms: dotnet, xamarin
 author: lindydonna
 ---
 
