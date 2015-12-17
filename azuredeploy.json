@@ -52,7 +52,7 @@
     },
     "variables": {
         "webSiteName":"[concat(parameters('appName'), uniqueString(resourceGroup().id))]",
-        "sqlserverName": "[concat(toLower(parameters('appName')), uniqueString(resourceGroup().id)), '-sqlserver')]"
+        "sqlserverName": "[concat(toLower(parameters('appName')), uniqueString(resourceGroup().id))]"
     },
     "resources": [
         {
