@@ -22,7 +22,7 @@ namespace FieldEngineerLite
 #if TRY_APP_SERVICE
         private const string MobileUrl = "ZUMOAPPURL";
 #else
-        private const string MobileUrl = "https://fieldengineerlite-code.azurewebsites.net/";
+        private const string MobileUrl = "https://your-site-name.azurewebsites.net/";
 #endif
 
         public async Task InitializeAsync()
