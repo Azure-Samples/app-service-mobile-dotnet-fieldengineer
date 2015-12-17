@@ -37,14 +37,6 @@
         "repoUrl": {
             "type": "string"
         },
-        "skuCapacity": {
-            "type": "int",
-            "defaultValue": 1,
-            "minValue": 1,
-            "metadata": {
-                "description": "Describes plan's instance count"
-            }
-        },
         "administratorLogin": {
             "type": "string"
         },
@@ -54,43 +46,13 @@
         "databaseName": {
             "type": "string"
         },
-        "collation": {
-            "type": "string",
-            "defaultValue": "SQL_Latin1_General_CP1_CI_AS"
-        },
-        "edition": {
-            "type": "string",
-            "defaultValue": "Basic",
-            "allowedValues": [
-                "Basic",
-                "Standard",
-                "Premium"
-            ]
-        },
-        "maxSizeBytes": {
-            "type": "string",
-            "defaultValue": "1073741824"
-        },
-        "requestedServiceObjectiveName": {
-            "type": "string",
-            "defaultValue": "Basic",
-            "allowedValues": [
-                "Basic",
-                "S0",
-                "S1",
-                "S2",
-                "P1",
-                "P2",
-                "P3"
-            ],
-            "metadata": {
-                "description": "Describes the performance level for Edition"
-            }
+        "useSQLCE": {
+            "type": "string"
         }
     },
     "variables": {
         "webSiteName":"[concat(parameters('appName'), uniqueString(resourceGroup().id))]",
-        "sqlserverName": "[concat(parameters('appName'), '-sqlserver')]"
+        "sqlserverName": "[concat(toLower(parameters('appName')), uniqueString(resourceGroup().id)), '-sqlserver')]"
     },
     "resources": [
         {
@@ -118,10 +80,10 @@
                         "[concat('Microsoft.Sql/servers/', variables('sqlserverName'))]"
                     ],
                     "properties": {
-                        "edition": "[parameters('edition')]",
-                        "collation": "[parameters('collation')]",
-                        "maxSizeBytes": "[parameters('maxSizeBytes')]",
-                        "requestedServiceObjectiveName": "[parameters('requestedServiceObjectiveName')]"
+                        "edition": "Basic",
+                        "collation": "SQL_Latin1_General_CP1_CI_AS",
+                        "maxSizeBytes": "1073741824",
+                        "requestedServiceObjectiveName": "Basic"
                     }
                 },
                 {
@@ -149,7 +111,7 @@
             },
             "sku": {
                 "name": "[parameters('skuName')]",
-                "capacity": "[parameters('skuCapacity')]"
+                "capacity": "1"
             },
             "properties": {
                 "name": "[parameters('hostingPlanName')]"
@@ -196,7 +158,8 @@
                         "[concat('Microsoft.Web/Sites/', variables('webSiteName'))]"
                     ],
                     "properties": {
-                        "Command": "deploy.cmd"
+                        "Command": "deploy.cmd",
+                        "TRY_APP_SERVICE": "[parameters('useSQLCE')]"
                     }
                 },
                 {

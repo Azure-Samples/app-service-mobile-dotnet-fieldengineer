@@ -18,7 +18,10 @@
             "value": "Not$ecurePassw0rd"
         },
         "appName": {
-            "value": "fieldengineer"
-        }
+            "value": "FieldEngineerLite"
+        },
+        "useSQLCE": {
+            "value": "1"
+        }        
     }
 }

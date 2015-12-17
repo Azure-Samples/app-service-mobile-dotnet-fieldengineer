@@ -45,15 +45,17 @@ Just click this button to deploy!
 
 The easiest way to deploy is to use the Continuous Integration feature of App Service.
 
-1. Create a new Mobile App from the portal.
+1. Fork this repo in GitHub.
 
-2. In the **Mobile** -> **Data** section, create a new Data Connection. For more detailed instructions, see [Create a .NET backend using the Azure portal](https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#create-app).
+2. Create a new Mobile App from the portal.
 
-3. In the portal, navigate to All Settings for the new app.
+3. In the **Mobile** -> **Data** section, create a new Data Connection. For more detailed instructions, see [Create a .NET backend using the Azure portal](https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#create-app).
 
-4. In the **Publishing** section, select **Continuous deployment**.
+4. In the portal, navigate to All Settings for the new app.
 
-5. Configure source control using either the main fieldengineer branch or your own fork.
+5. In the **Publishing** section, select **Continuous deployment**.
+
+6. Configure source control to point to your fork of this repo.
 
 6. Click the **Sync** button to do an initial deployment.
 
