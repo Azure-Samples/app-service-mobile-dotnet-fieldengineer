@@ -1,0 +1,27 @@
+﻿{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "administratorLogin": {
+            "value": "NewAdmin"
+        },
+        "databaseName": {
+            "value": "fieldengineer-sqldb"
+        },
+        "hostingPlanName": {
+            "value": "FieldEngineerLite-plan"
+        },
+        "repoUrl": {
+            "value": "https://github.com/lindydonna/fieldengineer"
+        },
+        "administratorLoginPassword": {
+            "value": "Not$ecurePassw0rd"
+        },
+        "appName": {
+            "value": "FieldEngineerLite"
+        },
+        "useSQLCE": {
+            "value": "1"
+        }        
+    }
+}

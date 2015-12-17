@@ -1,21 +1,31 @@
-# Field Engineer<small> - Azure Mobile Apps Demo</small>
+---
+services: app-service\mobile
+platforms: dotnet
+author: lindydonna
+---
+
+# Field Engineer 
+**Azure Mobile Apps Sample**
 
 **Try out a simple version of this demo and other Xamarin demos on ["Try App Service"](https://aka.ms/trymobile).**
 
 In this demo, we create a Mobile App which will allow field engineers at our cable company to more easily manage their appointments throughout the day. The app will sync the engineer's jobs for that day onto their device when there is an internet connection. When there isn't an internet connection, the Mobile Apps offline sync feature keeps the records available and edittable; when the engineer connects back to the internet, the local changes are synced and any new Jobs are pulled to their device.
 
 This is a demo where we show off some great features of Azure Mobile Apps and App Service, including:
- - Integrated Authentication with AAD and SalesForce
  - Offline Sync
  - Easy to use client SDK for Xamarin
 
 ### Demo
 
-The first step of the demo is deploying the environment and code. Checkout the **[Deploying](#deploying)** section below.
+The first step of the demo is deploying the environment and code. Checkout the **[Deploying](#deploying)** section below. Or, just click this button!
 
-Next, be sure you have an internet connection and have the Field Engineer app open. Click on refresh and that will ask you to login. If you set up Azure Active Directory and created a login within your domain, you should be able to login as that user. Until you login, none of your requests will make it through.
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
-Once you've managed to login, you'll see all the orders you have waiting to be fulfilled. At this point, you can disconnect your internet and make some changes. All your changes will be saved through a restart of the app. If you visit the admin page that comes with your site ({sitename}.azurewebsites.net/admin), you can see that none of the records have been updated. If you connect to the internet on your device again and refresh, your changes will sync to the server. You can see those changes reflected via the admin portal.
+Alternatively, you can deploy using the Azure Portal. [Click here to deploy](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flindydonna%2Ffieldengineer%2Fmaster%2Fazuredeploy.json). Note: you can set the parameter **useSQLCE** to 1 or 0 to specify if you want to use SQLCE or a SQL Azure database. However, this template always creates a SQL Azure Database even if you set the SQLCE parameter to 1.
+
+Once you've refreshed the client to get all remote changes, you'll see all the jobs you have waiting to be fulfilled. At this point, you can disconnect your internet and make some changes. All your changes will be saved through a restart of the app. 
+
+If you visit the admin page that comes with your site ({sitename}.azurewebsites.net/admin), you can see that none of the records have been updated. If you connect to the internet on your device again and refresh, your changes will sync to the server. You can see those changes reflected via the admin portal.
 
 [Checkout this gif of the demo!](http://i.imgur.com/J60zc9x.gif)
 
@@ -25,51 +35,51 @@ Once you've managed to login, you'll see all the orders you have waiting to be f
    - [Try it now](aka.ms/trymobile)
    - [Source on GitHub](https://github.com/xamarin/app-crm/)
  - [Azure Mobile Apps on Azure.com](https://azure.microsoft.com/en-us/services/app-service/mobile/)
- - [Kirill giving this demo on Azure Fridays](https://channel9.msdn.com/Shows/Azure-Friday/Azure-App-Service-Mobile-Apps-with-Kirill-Gavrylyuk)
-
+ - [Kirill Gavrylyuk giving this demo on Azure Fridays](https://channel9.msdn.com/Shows/Azure-Friday/Azure-App-Service-Mobile-Apps-with-Kirill-Gavrylyuk)
 
 ## Deploying
 
-### Full Demo
+Just click this button to deploy!
 
-These steps will help you set up an environment to run the Field Engineer demo.
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
-0. Download the source from [GitHub](https://github.com/azure/fieldengineer).
+### Manual deployment - full demo
 
-1. [Create a Mobile App.](https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-dotnet-backend-xamarin-ios-get-started-preview/)
+The easiest way to deploy is to use the Continuous Integration feature of App Service.
 
-2. In the Azure Portal, navigate to your Mobile App and open the Settings blade.
+1. Fork this repo in GitHub.
 
-3. Click on the Authentication setting. If you have not yet created a Gateway, do so now by following the instructions in the Authentication blade.
+2. Create a new Mobile App from the portal.
 
-4. [Create an AAD Application](https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication-preview/) and add it to the Mobile App Authentication Azure Active Directory settings menu.
+3. In the **Mobile** -> **Data** section, create a new Data Connection. For more detailed instructions, see [Create a .NET backend using the Azure portal](https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#create-app).
 
-5. Deploy the code in the [`./server`](./server) project. You'll need to do this from Visual Studio.
+4. In the portal, navigate to All Settings for the new app.
 
-6. Change the Gateway URL, Mobile App URL, and Mobile App name in the [`./client/FieldEngineerLite/Services/JobService.cs`](./client/FieldEngineerLite/Services/JobService.cs) file.
+5. In the **Publishing** section, select **Continuous deployment**.
 
-7. Build and run the client from Xamarin. You'll need a Mac build host.
+6. Configure source control to point to your fork of this repo.
 
-8. You can then login using one of your AAD identities.
+6. Click the **Sync** button to do an initial deployment.
 
-### Try It Now Demo
+### Try App Service version
 
-This is a scaled down demo that doesn't require AAD, SalesForce, or Azure SQL DB. It's designed to work with [Try App Service](https://tryappservice.azure.com/).
+There is a project configuration that uses SQL CE as the server database and therefore does not require SQL Azure. 
+
+To set up this version, after step #2 above, add an app setting with key `TRY_APP_SERVICE` and value `1`. To set an app setting, go to **All Settings** -> **Application Settings** -> **App Settings**. Then, continue with steps 3-6 above.
+
+### Client project
 
 Requirements:
- - Windows w/ Visual Studio
- - OSX w/ Xamarin Studio
+ - Xamarin Studio running on Mac OS X
  - Azure Account (for a free trial, use [Try App Service](https://aka.ms/trymobile) and the instructions there)
 
-1. Switch to the `tryitnow` branch.
+Steps:
 
-2. Deploy the code in the `server` folder to an Azure Mobile App. You can follow the instructions in the [*"Getting Started"* article](https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-dotnet-backend-xamarin-ios-get-started-preview/) on Azure.com.
+1. Open up the Xamarin Project
 
-3. Open up the Xamarin Project
+2. Update the Mobile App Name, in `./Services/JobService.cs`
 
-4. Update the Mobile App Name, Mobile App URL, and Mobile App Gateway strings in the `./Services/JobService.cs`
-
-5. Select an iPad target and start debugging.
+3. Select an iPad target and start debugging.
 
 ## Issues
 

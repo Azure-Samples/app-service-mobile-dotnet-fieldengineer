@@ -18,12 +18,17 @@ namespace FieldEngineerLite
         
         public IMobileServiceClient MobileService = null;
         private IMobileServiceSyncTable<Job> jobTable;
-                  
+
+#if TRY_APP_SERVICE
+        private const string MobileUrl = "ZUMOAPPURL";
+#else
+        private const string MobileUrl = "https://your-site-name.azurewebsites.net/";
+#endif
+
         public async Task InitializeAsync()
         {
             this.MobileService = 
-                new MobileServiceClient("https://fieldengineerlite-code.azurewebsites.net/", 
-                new LoggingHandler(true));
+                new MobileServiceClient(MobileUrl, new LoggingHandler());
 
             var store = new MobileServiceSQLiteStore("local.db");
             store.DefineTable<Job>();
