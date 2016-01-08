@@ -1,23 +1,22 @@
 ---
-services: app-service\mobile
+services: app-service\mobile, app-service\web
 platforms: dotnet, xamarin
 author: lindydonna
 ---
 
-# Field Engineer 
-**Azure Mobile Apps Sample**
+# Azure App Service field engineer sample with web admin portal and offline-sync-enabled Xamarin.Forms client
 
 **Try out a simple version of this demo and other Xamarin demos on ["Try App Service"](https://aka.ms/trymobile).**
 
-In this demo, we create a Mobile App which will allow field engineers at our cable company to more easily manage their appointments throughout the day. The app will sync the engineer's jobs for that day onto their device when there is an internet connection. When there isn't an internet connection, the Mobile Apps offline sync feature keeps the records available and edittable; when the engineer connects back to the internet, the local changes are synced and any new Jobs are pulled to their device.
+This sample is for a mobile client app for field engineers at a cable company to more easily manage their appointments throughout the day. The app will sync the engineer's jobs for that day onto their device when there is an internet connection. When there isn't an internet connection, the Mobile Apps offline sync feature keeps the records available and edittable; when the engineer connects back to the internet, the local changes are synced and any new Jobs are pulled to their device.
 
-This is a demo where we show off some great features of Azure Mobile Apps and App Service, including:
+This sample shows off some great features of Azure Mobile Apps and App Service, including:
  - Offline Sync
  - Easy to use client SDK for Xamarin
 
-### Demo
+### Overview
 
-The first step of the demo is deploying the environment and code. Checkout the **[Deploying](#deploying)** section below. Or, just click this button!
+The first step of the sample is deploying the environment and code. Checkout the **[Deploying](#deploying)** section below. Or, just click this button!
 
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
@@ -27,23 +26,13 @@ Once you've refreshed the client to get all remote changes, you'll see all the j
 
 If you visit the admin page that comes with your site ({sitename}.azurewebsites.net/admin), you can see that none of the records have been updated. If you connect to the internet on your device again and refresh, your changes will sync to the server. You can see those changes reflected via the admin portal.
 
-[Checkout this gif of the demo!](http://i.imgur.com/J60zc9x.gif)
-
-### See also
-
- - The Xamarin CRM app utilizing Azure Mobile
-   - [Try it now](aka.ms/trymobile)
-   - [Source on GitHub](https://github.com/xamarin/app-crm/)
- - [Azure Mobile Apps on Azure.com](https://azure.microsoft.com/en-us/services/app-service/mobile/)
- - [Kirill Gavrylyuk giving this demo on Azure Fridays](https://channel9.msdn.com/Shows/Azure-Friday/Azure-App-Service-Mobile-Apps-with-Kirill-Gavrylyuk)
-
 ## Deploying
 
 Just click this button to deploy!
 
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
-### Manual deployment - full demo
+### Manual deployment - full version (with SQL Azure)
 
 The easiest way to deploy is to use the Continuous Integration feature of App Service.
 
@@ -61,13 +50,13 @@ The easiest way to deploy is to use the Continuous Integration feature of App Se
 
 6. Click the **Sync** button to do an initial deployment.
 
-### Try App Service version
+### Try App Service version (SQL CE)
 
 There is a project configuration that uses SQL CE as the server database and therefore does not require SQL Azure. 
 
 To set up this version, after step #2 above, add an app setting with key `TRY_APP_SERVICE` and value `1`. To set an app setting, go to **All Settings** -> **Application Settings** -> **App Settings**. Then, continue with steps 3-6 above.
 
-### Client project
+### Mobile client project
 
 Requirements:
  - Xamarin Studio running on Mac OS X
@@ -90,3 +79,12 @@ We welcome and encourage PRs from the community. Just checkout [Azure's CLA](htt
 ## License
 
 See [LICENSE](./LICENSE) for full details.
+
+
+### See also
+
+ - The Xamarin CRM app utilizing Azure Mobile
+   - [Try it now](aka.ms/trymobile)
+   - [Source on GitHub](https://github.com/xamarin/app-crm/)
+ - [Azure Mobile Apps on Azure.com](https://azure.microsoft.com/en-us/services/app-service/mobile/)
+ - [Kirill Gavrylyuk giving this demo on Azure Fridays](https://channel9.msdn.com/Shows/Azure-Friday/Azure-App-Service-Mobile-Apps-with-Kirill-Gavrylyuk)
