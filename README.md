@@ -78,7 +78,7 @@ We welcome and encourage PRs from the community. Just checkout [Azure's CLA](htt
 
 ## License
 
-See [LICENSE](./LICENSE) for full details.
+See [LICENSE](https://github.com/Azure-Samples/app-service-mobile-dotnet-fieldengineer/blob/master/LICENSE) for full details.
 
 
 ### See also
