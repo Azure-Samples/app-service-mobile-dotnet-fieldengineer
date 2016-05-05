@@ -1,5 +1,5 @@
 ---
-services: app-service\mobile, app-service\web
+services: app-service\mobile, app-service\web, app-service
 platforms: dotnet, xamarin
 author: lindydonna
 ---
