@@ -13,7 +13,6 @@ namespace FieldEngineerLite
 {
     public class JobService
     {
-        public bool LoginInProgress = false;
         public bool Online = false;        
         
         public IMobileServiceClient MobileService = null;
@@ -33,6 +32,9 @@ namespace FieldEngineerLite
 
             await MobileService.SyncContext.InitializeAsync(store, StoreTrackingOptions.NotifyLocalAndServerOperations);
             jobTable = MobileService.GetSyncTable<Job>();
+
+            // This sample doesn't do any authentication. To add it, see 
+            // https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-xamarin-forms-get-started-users/
         }
 
         public async Task<IEnumerable<Job>> ReadJobs(string search)
@@ -70,26 +72,5 @@ namespace FieldEngineerLite
             if (Online)
                 await this.SyncAsync();
         }
-
-
-        //public async Task EnsureLogin()
-        //{
-        //    LoginInProgress = true;
-        //    while (this.AppService.CurrentUser == null) {
-        //        //await this.AppService.LoginAsync(
-        //        try 
-        //        {
-        //            await this.AppService.LoginAsync (App.UIContext, 
-        //                MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory.ToString());
-        //        }
-        //        catch(Exception ex)
-        //        {
-        //            Console.WriteLine("failed to authenticate: " + ex.Message);
-        //        }
-
-        //    }
-
-        //    LoginInProgress = false;
-        //}
     }
 }
