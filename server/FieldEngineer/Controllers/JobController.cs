@@ -33,18 +33,7 @@ namespace FieldEngineerLiteService.Controllers
         // PATCH tables/Job/48D68C86-6EA6-4C25-AA33-223FC9A27959
         public async Task<Job> PatchJob(string id, Delta<Job> patch)
         {
-
             Job job = patch.GetEntity();  // get new value
-            //var user = this.User as MobileAppUser;
-            //var creds = await user.GetIdentityAsync<AzureActiveDirectoryCredentials>();
-            //var token = this.Request.Headers.GetValues("x-zumo-auth").First();
-            //SalesforceClient client = new SalesforceClient(false);
-            //client.SetUser(user.Id, token);
-            //ITraceWriter traceWriter = this.Configuration.Services.GetTraceWriter();
-            //traceWriter.Info("Patch: userId: " + user.Id + ", token:" + token);            
-
-            //await client.UpdateCase( "0000" + job.JobNumber, job.Status, job.WorkPerformed);
-
             return await UpdateAsync(id, patch);
         }
 

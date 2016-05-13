@@ -70,12 +70,6 @@ namespace FieldEngineerLite.Views
             
             this.Title = "Appointments";
 
-            //var tapGestureRecognizer = new TapGestureRecognizer();
-            //tapGestureRecognizer.Tapped += async (s, e) => {
-            //    await App.JobService.EnsureLogin();
-            //};
-            //logo.GestureRecognizers.Add(tapGestureRecognizer);
-
             var statusBar = new Label { BackgroundColor = Color.Gray, TextColor = Color.White };
             statusBar.SetBinding(Label.TextProperty, "PendingChanges", stringFormat: "Pending changes: {0}");
             statusBar.BindingContext = this;
@@ -141,8 +135,6 @@ namespace FieldEngineerLite.Views
 
         public async Task RefreshAsync()
         {
-            //if (App.JobService.LoginInProgress == true) return;
-
             var groups = from job in await jobService.ReadJobs("")
                          group job by job.Status into jobGroup
                          select jobGroup;
